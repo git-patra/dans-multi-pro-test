@@ -91,9 +91,9 @@ export class UsersOrchestrator {
           if (params.q)
             query.where(
               new Brackets((qb) => {
-                qb.where('user.name ilike =:search', {
+                qb.where('user.name like :search', {
                   search: `%${params.q}%`
-                }).orWhere('user.email ilike =:search', {
+                }).orWhere('user.email like :search', {
                   search: `%${params.q}%`
                 })
               })
