@@ -6,6 +6,9 @@
 # setting .env
 $ DBMS menggunakan MYSQL, credential mohon sesesuai dengan .env.example
 
+# install package
+$ yarn install
+
 # running
 $ npm run start:dev
 
