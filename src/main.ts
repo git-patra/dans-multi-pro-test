@@ -17,8 +17,8 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ transform: true }))
 
   const config = new DocumentBuilder()
-    .setTitle('PrimaKu Code Test')
-    .setDescription('PrimaKu Code Test API documentation')
+    .setTitle('Dans Multi Pro Code Test')
+    .setDescription('Dans Multi Pro Code Test API documentation')
     .setVersion('1.0')
     .addBearerAuth(
       { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },

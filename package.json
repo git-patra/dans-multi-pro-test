@@ -1,5 +1,5 @@
 {
-  "name": "primaku-code-test",
+  "name": "dans-multipro-test",
   "version": "0.0.1",
   "description": "",
   "author": "patra",
@@ -22,6 +22,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@nestjs/axios": "^1.0.0",
     "@nestjs/common": "^8.0.0",
     "@nestjs/config": "^1.2.0",
     "@nestjs/core": "^8.0.0",

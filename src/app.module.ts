@@ -8,6 +8,7 @@ import { JwtStrategy } from './base/auth/jwt.strategy'
 import { ServeStaticModule } from '@nestjs/serve-static'
 import { join } from 'path'
 import { CONNECTION_NAME } from './base/base.constants'
+import { JobListModule } from './modules/job-list/job-list.module'
 
 @Module({
   imports: [
@@ -28,7 +29,8 @@ import { CONNECTION_NAME } from './base/base.constants'
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'uploads')
     }),
-    UsersModule
+    UsersModule,
+    JobListModule
   ],
   controllers: [],
   providers: [JwtStrategy]

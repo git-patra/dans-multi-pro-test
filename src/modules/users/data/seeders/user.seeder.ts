@@ -4,8 +4,8 @@ import { UserRole } from '../../../../base/base.constants'
 export const UserSeeder: Array<Partial<UsersEntity>> = [
   {
     name: 'admin',
-    email: 'admin@primaku.com',
-    password: '#Admin123',
+    email: 'admin@dansmulti.pro',
+    password: '123',
     role: UserRole.ADMIN
   }
 ]

@@ -1,15 +1,25 @@
-import { BaseCreateManager } from 'src/base/managers/process/base-create.manager'
 import { UsersDataService } from 'src/modules/users/data/services/users-data.service'
 import * as bcrypt from 'bcrypt'
 
 import { UsersEntity } from '../../entities/users.entity'
 
-export class UsersCreateManager extends BaseCreateManager<UsersEntity> {
+export class UsersCreateManager {
+  result: UsersEntity
+
   constructor(
     private usersDataService: UsersDataService,
     private usersEntity: UsersEntity
-  ) {
-    super(usersDataService, usersEntity)
+  ) {}
+
+  async execute(): Promise<UsersEntity> {
+    try {
+      await this.beforeProcess()
+      await this.process()
+
+      return this.result
+    } catch (e) {
+      throw new Error(e.message)
+    }
   }
 
   async beforeProcess(): Promise<void> {
@@ -18,13 +28,21 @@ export class UsersCreateManager extends BaseCreateManager<UsersEntity> {
 
     const salt = 10
 
-    this.entity.password = await bcrypt.hash(this.entity.password, salt)
+    this.usersEntity.password = await bcrypt.hash(
+      this.usersEntity.password,
+      salt
+    )
+  }
+
+  async process(): Promise<void> {
+    this.result = await this.usersDataService.create(this.usersEntity)
   }
 
   async validateUserByEmail(): Promise<boolean> {
     const checkUsers = await this.usersDataService.getOneByOptions({
-      where: { email: this.entity.email }
+      where: { email: this.usersEntity.email }
     })
+
     return !!checkUsers
   }
 }

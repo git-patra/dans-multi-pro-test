@@ -1,4 +1,4 @@
-import { FindManyOptions, FindOneOptions, Repository } from 'typeorm'
+import { FindManyOptions, Repository } from 'typeorm'
 import {
   IPaginationOptions,
   paginate,
@@ -18,12 +18,6 @@ export abstract class BaseDataService<Entity> {
     return await this.repository.save(entity)
   }
 
-  async update(id: string, entity: any, findOneOptions): Promise<Entity> {
-    await this.repository.update(id, entity)
-
-    return await this.getOneByOptions(findOneOptions)
-  }
-
   async getIndex(
     options: IPaginationOptions,
     extraQuery: FindManyOptions<Entity> = null
@@ -40,16 +34,5 @@ export abstract class BaseDataService<Entity> {
   async getOneByOptions(findOneOptions): Promise<Entity> {
     findOneOptions.relations = this.relations
     return await this.repository.findOne(findOneOptions)
-  }
-
-  async getOneOrFailByOptions(
-    findOneOptions: FindOneOptions<Entity>
-  ): Promise<Entity> {
-    findOneOptions.relations = this.relations
-    return await this.repository.findOneOrFail(findOneOptions)
-  }
-
-  async deleteById(id: string): Promise<void> {
-    await this.repository.delete(id)
   }
 }

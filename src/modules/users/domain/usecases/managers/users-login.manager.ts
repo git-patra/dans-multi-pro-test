@@ -1,30 +1,30 @@
-import { BaseGetByOptions } from 'src/base/managers/process/base-get-by-options.manager'
 import { UsersDataService } from 'src/modules/users/data/services/users-data.service'
-import { UsersEntity } from '../../entities/users.entity'
 import * as bcrypt from 'bcrypt'
 import { JwtService } from '@nestjs/jwt'
+import { UsersEntity } from '../../entities/users.entity'
 
-export class UsersLoginManager extends BaseGetByOptions<UsersEntity> {
+export class UsersLoginManager {
+  result: UsersEntity
+
   constructor(
     public usersDataService: UsersDataService,
     public jwtService: JwtService,
     public email: string,
     public password: string
-  ) {
-    super(usersDataService)
-  }
+  ) {}
 
-  async beforeProcess(): Promise<void> {
-    return
+  async execute(): Promise<UsersEntity> {
+    await this.process()
+    await this.afterProcess()
+
+    return this.result
   }
 
   async process(): Promise<void> {
-    let findProperties = {}
-    findProperties = this.setFindProperties()
-
-    this.result = await this.baseDataService.getOneByOptions({
-      where: findProperties
+    this.result = await this.usersDataService.getOneByOptions({
+      where: { email: this.email }
     })
+
     if (!this.result) this.handleErrorLogin()
   }
 
@@ -49,9 +49,5 @@ export class UsersLoginManager extends BaseGetByOptions<UsersEntity> {
 
   handleErrorLogin(): void {
     throw new Error('Combination email and password is wrong!')
-  }
-
-  setFindProperties(): any {
-    return { email: this.email }
   }
 }

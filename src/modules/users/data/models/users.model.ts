@@ -1,4 +1,4 @@
-import { STATUS, TABLENAME, UserRole } from 'src/base/base.constants'
+import { TABLENAME, UserRole } from 'src/base/base.constants'
 import {
   Column,
   CreateDateColumn,
