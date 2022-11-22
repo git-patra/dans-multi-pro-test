@@ -9,7 +9,7 @@ $ DBMS menggunakan MYSQL, credential mohon sesesuai dengan .env.example
 # running
 $ npm run start:dev
 
-# untuk dokumentasi parameter dan url apa saja yang bisa dihit  bisa dilihat di swagger, kunjungi:
+# untuk dokumentasi parameter dan url apa saja yang bisa dihit bisa dilihat di swagger, kunjungi:
 $ http://localhost:3333/api/docs
 
 # list api
@@ -28,7 +28,7 @@ $ password: 123
 ## Noted
 
 ```
-# Semua endpoint job-list baik pagination/detail akan menembak api yang disediakan dans multi pro 
+# Semua endpoint job-list baik pagination/detail akan menembak api yang disediakan dans multi pro menggunakan library axios
 # example (http://dev3.dansmultipro.co.id/api/recruitment/positions.json?description)
 # feature yang saya kerjakan hanya login, create user, dan hit end point api yg telah disediakan
 ```
